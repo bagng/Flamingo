@@ -232,6 +232,9 @@ if(endMode){ return 0 }
 
 prefData = JSON.parse(fm.readString(prefPath))
 
+if(prefData.artist == null)
+  return
+
 const artistInput = prefData.artist
 const artist = artistInput.replace(/ /gi, "-").toLowerCase()
 
@@ -270,7 +273,7 @@ async function loadArts(artist){
            },
            link: productLinkEle.getAttribute('href'),
            image: {
-              link: imageEle.getAttribute('data-src'),
+              link: imageEle.getAttribute('src'),
               width: imageEle.getAttribute('width'),
               height: imageEle.getAttribute('height'),
            }
