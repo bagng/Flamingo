@@ -32,6 +32,7 @@ var bnum = 101 // Do not edit this area
 if (!fm.fileExists(fDir)) { fm.createDirectory(fDir) }
 if (fm.fileExists(prefPath)) {
     prefData = JSON.parse(fm.readString(prefPath))
+    if (!prefData.artist) prefData.artist = "!weekly";
 }
 if (!fm.fileExists(localPath)) {
     fm.writeString(localPath, JSON.stringify(artworkOrgPref))
@@ -232,9 +233,8 @@ if (endMode) { return 0 }
 
 prefData = JSON.parse(fm.readString(prefPath))
 
-if (prefData.artist == undefined && prefData.artist == null)
+if (prefData.artist == undefined || prefData.artist == null)
     return
-console.log(prefData.artist)
 
 const artistInput = prefData.artist
 const artist = artistInput.replace(/ /gi, "-").toLowerCase()
